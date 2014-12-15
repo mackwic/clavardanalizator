@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+ruby '2.1.3'
+
+gem 'pg'
+gem 'slim-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
@@ -42,6 +46,9 @@ group :development do
   gem 'binding_of_caller'
 end
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+group :production do
+  gem 'puma'
+  gem 'remote_syslog_logger'
+end
+
 
