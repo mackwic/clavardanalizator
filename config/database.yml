@@ -14,12 +14,13 @@ development:
   database: db/development.sqlite3
 
 production:
+  user: logbot
   adapter: postgresql
   connections: 5
   pool: 5
   timeout: 5000
   host: localhost
-  database: clavardanalizator-prod
+  database: logbot-production
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
