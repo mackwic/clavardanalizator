@@ -1,5 +1,5 @@
 class LogsController < ApplicationController
-  protect_from_forgery :reset_session, except: :new
+  protect_from_forgery except: :new
   skip_before_action :verify_authenticity_token
 
   def index
