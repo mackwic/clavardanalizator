@@ -65,6 +65,7 @@ task :deploy => :environment do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     queue "#{DATABASE_URL} #{RENV} ./bin/rake db:migrate"
+    #queue "#{DATABASE_URL} #{RENV} ./bin/rake assets:precompile"
     #invoke :'rails:db_migrate'
     #invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
@@ -72,6 +73,8 @@ task :deploy => :environment do
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+      queue "cd #{deploy_to}"
+      queue "#{DATABASE_URL} #{RENV} bin/rails server &"
     end
   end
 end
