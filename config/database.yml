@@ -18,6 +18,7 @@ production:
   connections: 5
   database: logbot-production
   host: localhost
+  password: 'logbot'
   pool: 5
   timeout: 5000
   user: logbot

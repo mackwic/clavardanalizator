@@ -53,6 +53,9 @@ task :setup => :environment do
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml'."]
 end
 
+DATABASE_URL="DATABASE_URL='postgresql://logbot:logbot@localhost/logbot-production'"
+RENV = "RAILS_ENV='production'"
+
 desc "Deploys the current version to the server."
 task :deploy => :environment do
   deploy do
@@ -61,8 +64,9 @@ task :deploy => :environment do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
-    invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
+    queue "#{DATABASE_URL} #{RENV} ./bin/rake db:migrate"
+    #invoke :'rails:db_migrate'
+    #invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     to :launch do
